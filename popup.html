@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Parallel Translate</title>
+<style>
+  :root { --bg:#fff; --fg:#1f2937; --muted:#6b7280; --line:#e5e7eb; --accent:#4f46e5; --accent-h:#4338ca; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#1f2230; --fg:#f3f4f6; --muted:#9ca3af; --line:#374151; --accent:#6366f1; --accent-h:#818cf8; }
+  }
+  * { box-sizing: border-box; }
+  body { width: 240px; margin: 0; padding: 16px; background: var(--bg); color: var(--fg);
+         font: 14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  h1 { font-size: 15px; margin: 0 0 14px; display: flex; align-items: center; gap: 8px; }
+  h1::before { content: "文A"; font-size: 11px; font-weight: 700; color: #fff; background: var(--accent);
+               padding: 4px 6px; border-radius: 6px; }
+  label { display: block; font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  select, input, button { width: 100%; padding: 10px 12px; font: inherit; border-radius: 10px; }
+  select, input { border: 1px solid var(--line); background: var(--bg); color: var(--fg); }
+  select:focus, input:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .check { display: flex; align-items: center; gap: 8px; margin: 12px 0 0; font-size: 13px; color: var(--fg); cursor: pointer; }
+  .check input { width: auto; margin: 0; accent-color: var(--accent); }
+  .keys { display: none; margin-top: 8px; }
+  .keys input + input { margin-top: 6px; }
+  button { margin-top: 12px; border: 0; background: var(--accent); color: #fff; font-weight: 600; cursor: pointer;
+           transition: background .15s, transform .05s; }
+  button:hover { background: var(--accent-h); }
+  button:active { transform: scale(.98); }
+</style>
+<h1>Parallel Translate</h1>
+<label for="method">Method</label>
+<select id="method">
+  <option value="google">Google (free)</option>
+  <option value="claude">Claude API</option>
+  <option value="openai">OpenAI (ChatGPT) API</option>
+  <option value="gemini">Gemini API</option>
+</select>
+<div class="keys" data-for="claude">
+  <input id="claudeKey" type="password" placeholder="Anthropic API key">
+</div>
+<div class="keys" data-for="openai">
+  <input id="openaiKey" type="password" placeholder="OpenAI API key">
+</div>
+<div class="keys" data-for="gemini">
+  <input id="geminiKey" type="password" placeholder="Gemini API key">
+</div>
+<label for="lang" style="margin-top:12px">Translate to</label>
+<select id="lang">
+  <option value="th">ไทย</option>
+  <option value="en">English</option>
+  <option value="ja">日本語</option>
+  <option value="zh-CN">中文 (简体)</option>
+  <option value="ko">한국어</option>
+  <option value="vi">Tiếng Việt</option>
+  <option value="id">Indonesia</option>
+  <option value="fr">Français</option>
+  <option value="de">Deutsch</option>
+  <option value="es">Español</option>
+</select>
+<label class="check"><input id="replace" type="checkbox"> Replace original text</label>
+<label style="margin-top:12px">ส่วนที่ต้องการแปล</label>
+<label class="check" style="margin-top:6px"><input type="radio" name="scope" value="page"> ทั้งหน้า</label>
+<label class="check" style="margin-top:6px"><input type="radio" name="scope" value="element"> เลือก element บนหน้าเว็บ</label>
+<button id="go">Translate page</button>
+<script src="popup.js" defer></script>
+</html>
